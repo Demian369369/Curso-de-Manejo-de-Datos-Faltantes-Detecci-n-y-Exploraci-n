@@ -1,0 +1,47 @@
+Codigo de la funcion que permite completar los datos faltante para poder graficar el scatterplot
+
+
+# funcion que añade valores aleatorios a las variables con valores faltantes
+# para visualizarlos en un eje
+def column_fill_with_dummies(
+    column: pd.Series,
+    proportion_below: float=0.10, #Proporcion de los datos en la grafica 
+    jitter: float=0.075,  # evita el asolapamiento de los puntos en la grafica
+    seed: int=42, #semilla para la aleatoriedad
+) -> pd.Series: # la funcion retorna una serie
+
+    #Copiar las columnas del dataframe
+    column = column.copy(deep=True)
+
+    #Extraer los valores de las variables
+    missing_mask = column.isna() # matriz de booleanos
+    number_missing_values = missing_mask.sum() #conteo de valores faltantes
+    column_range = column.max() - column.min() #rango de las variables
+
+    # shift data
+    column_shift = column.min() - column.min() * proportion_below
+
+    # crear un poco de ruido alrededor de los puntos 
+    np.random.seed(seed)
+    column_jitter = (np.random.rand(number_missing_values) - 2) * column_range * jitter
+
+    #Guardar los nuevos datos aleatorios
+    column[missing_mask] = column_shift + column_jitter
+
+    return column
+
+
+
+    Permite visualizar y comparar dos variables cuando a ambas le faltan valores. Un grafico muy util para este tipo de comparaciones son los scatterplot
+
+
+
+graph32.jpg
+
+Para este ejemplo, los puntos azules indican que existe valores tanto para la temperatura como para la humedad. Los puntos rojos indican que solo hay valores para una de las variables y no para la otra. Este tipo de grafica nos ayuda a conocer donde estan agrupados los valores faltantes respecto a otras variables y se grafican fuera de la presencia de los puntos reales para que no introduzcan ruido.
+
+Ademas podemos incluir otro tipo de graficos como los boxplot que nos ayudan a compara la distribucion de los datos de las variables con la distribucion de los datos faltantes y a visualizar si se estan acumulando en un espacio del scatterplot
+
+Este tipo de analisis es importante porque al realizar un EDA sobre los datos faltantes queremos saber si estos siguen una relacion, una tendencia, un comportamiento caracteristico que podamos rellenar segun su variabilidad.
+
+

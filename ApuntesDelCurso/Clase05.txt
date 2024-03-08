@@ -1,0 +1,30 @@
+Crear una nueva clase para extender Pandas
+
+Creamos una clase y dentro de ella todos lo metodos que necesitemos. Para poder hacer accesible los metodos, utilizamos un decorador de pandas para acceder a la clase mediante una palabra clave
+
+
+@pd.api.extensions.register_dataframe_accessor("missing")  #Decorador
+class MissingMethods:                                      #clase
+    def __init__(self, pandas_obj):
+        self._df = pandas_obj
+
+    def number_missing(self):                        #metodo para contar datos faltantes
+        return self._df.isna().sum().sum()
+
+    def number_complet(self):                        #metodo para contar datos completos
+        return self._df.size - self._df.missing.number_missing()
+Para acceder a los metodos se procede como sigue:
+
+
+# actualizamos el dataframe para que se guarden los cambios
+df = pd.DataFrame(df)
+
+# accediendo al metodo number_missing
+df.missing.number_missing()
+
+#accediendo al metodo number_complet
+df.missing.number_complet()
+
+ Extendiendo la API de Pandas
+Es muy buena práctica modularizar el código para mejorar el flujo de trabajo, así si quiero modificar el código de una función solo tengo que acceder al notebook de las funciones y no buscar en todo el notebook principal.
+Me gusta mucho de Jesus que nos comparte las herramientas de su workflow que tiene como data scientist para facilitar el nuestro.

@@ -1,0 +1,5 @@
+La línea de código "%run pandas-missing-extension.ipynb" se utiliza en el entorno de Deepnote para ejecutar un archivo de notebook de Jupyter llamado "pandas-missing-extension.ipynb".
+
+Este comando carga y ejecuta el notebook en la sesión actual de Deepnote, lo que significa que cualquier código contenido en el notebook se ejecutará como si se hubiera copiado y pegado directamente en la sesión de Deepnote.
+
+En particular, es probable que el notebook "pandas-missing-extension.ipynb" contenga definiciones de funciones o variables que se utilizarán posteriormente en la sesión de Deepnote. Al ejecutar el notebook, se asegura que estas definiciones estén disponibles en la sesión actual y puedan ser utilizadas en el análisis de datos o en cualquier otro trabajo que se esté realizando en Deepnote.

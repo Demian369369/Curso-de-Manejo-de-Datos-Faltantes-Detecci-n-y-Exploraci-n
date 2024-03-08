@@ -1,0 +1,58 @@
+Exponer N tuplas de valores faltantes. Encontrar los pares faltantes de name y time
+
+# Rellena los datos faltantes que le indiquemos
+(
+    implicit_to_explicit_df
+    # janitor
+    .complete(
+        "name",
+        "time"
+    )
+)
+
+
+graph18.jpg
+
+Limitar la exposicion de N tuplas de valores faltantes
+
+# limitar los datos que quieres mostrar
+(
+    implicit_to_explicit_df
+    .complete( # formato diccionario con as variables y valores a mostrar
+        {'name': ['lynn', 'zelda']},
+        {'time': ['morning', 'afternoon']},
+        sort=True # ordena los valores de manera que primero muestra los pasados y luego el resto
+    )
+)
+
+
+graph19.jpg
+
+Rellenar los valores faltantes
+
+(
+    implicit_to_explicit_df
+    .complete(
+        'name',
+        'time',
+        fill_value= np.nan  # puedes asignar el valor que desees. Por defecto asigna nan
+    )
+)
+
+
+graph20.jpg
+
+Limitar el rellenado de valores faltantes implicitos
+
+(
+    implicit_to_explicit_df
+    .complete(
+        'name',
+        'time',
+        fill_value=0,
+        explicit=False
+    )
+)
+
+
+graph21.jpg

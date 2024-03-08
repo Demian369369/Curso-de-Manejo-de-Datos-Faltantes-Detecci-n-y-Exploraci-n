@@ -1,0 +1,47 @@
+Conociendo nuestro datasets para manejo de datos faltantes
+Descarga de archivos mediante una URL en el Notebooks
+
+Guardar la url en una variable
+
+nombre_variable = "URL"
+Utiliza la linea de comandos desde el notebooks para descargar los datos
+
+!wget -O ./data/pima-indians-diabetes.csv { nombre_variable } -q
+#!linea de comandos
+# wget-comando para descargar datos
+# -O 
+# ruta para almacenar los datos + nombre
+# {URL} 
+# -q para que no muestre la descarga
+Descarga de varios archivos desde una URL
+
+Crea unidades de informacion de los conjuntos de Datos
+
+#Guarda la URL en una variable
+base_url = "https://github.com/njtierney/naniar/raw/master/data/"
+#Guarda los nombres de los archivos a descargar en una lista 
+datasets_names = ("oceanbuoys", "pedestrian", "riskfactors")
+#Guarda la extension de los archivos en una variable
+extension = ".rda"
+Descarga y carga los conjuntos de datos en un dataset
+
+datasets_dfs = {} # diccionario para almacenar lor archivos
+
+for dataset_name in datasets_names:
+
+    dataset_file = f"{ dataset_name }{ extension }"
+    dataset_output_file = f"./data/{ dataset_file }"
+    dataset_url = f"{ base_url }{ dataset_file }"
+    
+    !wget -q -O { dataset_output_file } { dataset_url } #linea de comando para descargar
+
+    datasets_dfs[f"{ dataset_name }_df"] = pyreadr.read_r(dataset_output_file).get(dataset_name)
+
+datasets_dfs.keys()
+Incluir el conjunto de datos en nuestro ambiente local
+
+locals().update(**datasets_dfs)
+del datasets_dfs
+Verificar que hayan cargado
+
+oceanbuoys_df.shape, pedestrian_df.shape, riskfactors_df.shape, diabetes_df.shape

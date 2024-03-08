@@ -1,0 +1,28 @@
+Es importante saber que tipo de mecanismo es el que esta ocasionando que nuestros datos falten, en este ejemplo de wikipedia
+Se trata el ejemplo de un cuestionario sobre depresión, y basicamente se sabía que si la falta de datos era:
+.
+
+MAR: An example is that males are less likely to fill in a depression survey but this has nothing to do with their level of depression, after accounting for maleness.
+
+Básicamente si eran hombres era mas probable que faltara ese valor (indicador de depresión). Aquí la localización del valor faltante dependia de la variable male/female
+.
+
+MNAR: This would occur if men failed to fill in a depression survey because of their level of depression.
+
+Y en este otro caso faltaban esos valores debido a la misma variable o indicador de "depresión", las personas estaban tan deprimidas que por esta misma razón no podian ir y tomar la encuesta.
+
+
+Y la conclusión fue:
+
+The more data is missing (MNAR), the more biased are the estimations. We underestimate the intensity of depression in the population.
+
+
+Si no se toman en cuenta los datos faltantes MNAR, entonces se pueden caer en sesgos. Y como dice el proverbio:
+.
+
+Garbage in, garbage out.
+
+.
+
+
+

@@ -1,0 +1,136 @@
+1. ¿Por qué deberías explorar y lidiar con los valores faltantes? 
+
+Al encontrar valores faltantes en los datos, es necesario explorarlos y entenderlos para evitar producir 
+sesgos en los resultados e incluso evitar problemas en la creación de modelos. 
+
+2. Responde si la siguiente sentencia es verdadera o falsa:
+A pesar de que la mejor manera de tratar a los datos que faltan es no tenerlos, 
+esto es pasa con una frecuencia baja. Por lo tanto, deberemos aprender cómo tratarlos apropiadamente.
+
+Verdadera 
+
+3. A lo largo de tu carrera como científica de datos utilizarás distintas herramientas de software. 
+¿Qué es algo que siempre debes aprender para cada herramienta al tratar valores faltantes? 
+
+Sus operaciones y representaciones de los valores faltantes. 
+
+4. Recolectar datos es una tarea del día a día de una científica de datos. 
+Puedes combinar el poder de interactividad de los jupyter notebooks junto con la versatilidad del uso de 
+la línea de comandos para conseguir hacer este proceso automático en un ambiente familiar. 
+¿Esto es verdadero o falso?
+
+Verdadero 
+
+5. Pandas es una librería increíble para el manejo de datos tabulares, no obstante, sus métodos y 
+estructuras pueden no satisfacer tus necesidades completamente. 
+Para ello, Pandas ofrece opciones para extenderlo y ajustarlo a tus requerimientos. 
+¿Cuál de los siguientes decoradores puede ayudarte a registrar un acceso a funciones y propiedades de un DataFrame?
+
+pandas.api.extensions.register_dataframe_accessor() 
+
+6. Tabular es una forma práctica de expresar valores, magnitudes u otros datos por medio de tablas, 
+pero antes de llegar a una tabla, siempre es bueno comenzar con ___. 
+
+Resúmenes simples, como números. 
+
+7. Al trabajar con datos temporales, la pregunta 
+"¿Cuál es mi racha de valores completos y faltantes en una variable?" 
+Puede ser importante por que ___. 
+
+Permite encontrar fechas / períodos en los cuales esté acumulando valores faltantes. 
+Lo que permite continuar investigando en esos períodos y entender el por qué de la ausencia de valores. 
+
+8. ¿Por qué deberías visualizar tus valores faltantes? 
+
+La visualización de datos hace sencillo visualizar 
+tendencias, patrones y datos atípicos en nuestro conjunto de datos. 
+
+REPASAR CLASE 
+
+9. La siguiente sentencia es verdadera o falsa:
+Los valores faltantes siempre son representados como NA.
+
+Verdadera 
+REPASAR CLASE 10. 
+
+¿Qué puedes concluir de la siguiente afirmación? 
+
+Asumir que los valores faltantes siempre vendrán en un único formato es un error, 
+pero asumir que siempre seremos capaces de detectar la ausencia de valores es un error aún mayor.
+Los valores faltantes pueden tomar distintas formas dentro de un conjunto de datos, pero también pueden 
+no estar incluidas de forma directa dentro del espacio observable. 
+
+
+11. ¿Qué significa que puedan existir valores faltantes implícitos? 
+
+Un valor faltante implícito indica que el valor faltante debería estar incluido en el conjunto de datos, 
+sin que éste lo diga o lo especifique de forma directa. 
+
+12. ¿Cuál de las siguientes estrategias no corresponde a un método para encontrar valores faltantes implícitos? 
+
+Ninguna de las respuestas es correcta. 
+
+13. ¿Cuál de los siguientes elementos es un mecanismo de acción de los valores faltantes? 
+
+Todos son un mecanismo de acción de los valores faltantes. 
+
+14. Llegas a tu trabajo y observas que algunas personas faltan, pero realmente sabes que la ausencia de 
+estas personas no está ligada entre sí. ¿Qué tipo de mecanismo de valores faltantes podría estar actuando? 
+
+Missing Completely At Random (MCAR). 
+
+15. Llegas a tu trabajo y observas que todos los amigos de Lynn se encuentran ausentes, sin excepción. 
+¿Qué tipo de mecanismo de valores faltantes podría estar actuando? 
+
+Missing Not At Random (MNAR). 
+
+16. ¿Cuál no es una característica de la matriz de sombras? 
+
+Valores implícitos. 
+
+17. ¿Qué es la matriz de sombras? 
+
+Es una matriz que tiene las mismas dimensiones que los datos originales, y 
+consiste de indicadores binarios para los valores faltantes, donde los valores faltantes 
+son representados explícitamente.
+
+Una gráfica de puntos es muy útil para visualizar relaciones entre variables. 
+No obstante, si al menos una de las dos variables tiene valores faltantes, 
+estos puntos no serán dibujados. 
+¿Cómo podrías solventar este problema para continuar explorando sin agregar ruido a tus datos reales? 
+
+Agregar valores dummy a los valores faltantes para visualizarlos en los marginales de la gráfica de puntos y 
+observar su distribución en cada eje. 
+
+19. ¿Qué significa cuantificar la correlación de nulidad? 
+
+La correlación de nulidad cuantifica qué tan fuerte la presencia o ausencia de una variable afecta 
+la presencia o ausencia de otra. 
+
+20. ¿Qué significa que una variable tenga una correlación de nulidad de
+-1, 0 o 1 con otra variable? 
+
+Si la correlación es -1, si una variable aparece la otra seguramente no. 
+Si la correlación es 0, la presencia u ausencia de una variable no afecta la de otra. 
+a correlación de 1 indica que si una variable aparece la otra también lo hará. 
+
+21. ¿Qué busca mostrar el gráfico de dendograma de nulidad? 
+
+Agrupar columnas que tiene una alta correlación de nulidad. 
+
+22. ¿Qué alternativas existen para tratar valores faltantes? 
+
+Eliminación e Imputación de valores faltantes o realizar una nueva colecta de datos. 
+
+23. ¿Qué significa la eliminación de valores faltantes por el método pairwise? 
+
+En la eliminación listwise, la eliminación ocurre cuando un procedimiento usa casos que contienen valores 
+faltantes. El procedimiento no incluye una variable particular cuando existe un valor falte, 
+pero puede utilizar otras variable sin valores faltantes. 
+
+24. ¿Qué es la imputación de valores faltantes? 
+
+Estimar los valores ausentes con base a los valores de otras variables o modelos predictivos. 
+
+25. ¿Cuál podría ser una desventaja de la imputación de un único valor como la media, mediana o moda? 
+Puede sesgar los resultados y perder la correlación entre variables. 

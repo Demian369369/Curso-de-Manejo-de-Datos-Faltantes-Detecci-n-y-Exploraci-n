@@ -1,0 +1,98 @@
+Comparando los datos faltantes de la variable Peso con los valores de la variable Edad
+
+(
+    riskfactors_df
+    .missing.bind_shadow_matrix(only_missing=True)
+    .pipe(
+        lambda df: (
+            sns.boxenplot(
+                data=df,
+                x = 'weight_lbs_NA', #variables con datos faltantes
+                y = 'age'  #variable de comparacion
+            )
+        )
+    )
+)
+
+
+graph28.jpg
+
+Visualizacion alternativa mediante funciones de densidad
+
+(
+    riskfactors_df
+    .missing.bind_shadow_matrix(only_missing=True)
+    .pipe(
+        lambda df: (
+            sns.displot(
+                data=df,
+                x = 'age', #variable de distribucion
+                hue = 'weight_lbs_NA',  #variable de comparacion
+                kind= 'kde' #distribucion de densidad
+            )
+        )
+    )
+)
+
+
+graph29.jpg
+
+Visualizacion de la variable Edad y los valores faltantes de la variable Peso mediante histogramas independientes. Este tipo de grafico son muy dificiles de comparar debido a que tenemos mas datos que no faltan de los que faltan
+
+(
+    riskfactors_df
+    .missing.bind_shadow_matrix(only_missing=True)
+    .pipe(
+        lambda df: (
+            sns.displot(
+                data=df,
+                x = 'age', #variable de distribucion
+                col = 'weight_lbs_NA',  #variable de comparacion
+                
+            )
+        )
+    )
+)
+
+
+graph30.jpg
+
+Visualizacion altenativa de los datos anteriores donde el eje de las Y es independiente para cada grafico
+
+# Eje de las y independientes para cada grafico
+(
+    riskfactors_df
+    .missing.bind_shadow_matrix(only_missing=True)
+    .pipe(
+        lambda df: (
+            sns.displot(
+                data=df,
+                x = 'age', #variable de distribucion
+                col = 'weight_lbs_NA',  #variable de comparacion
+                facet_kws={
+                    'sharey': False
+                }               
+            )
+        )
+    )
+)
+
+
+graph31.jpg
+
+Grilla de graficos con dos variables de datos faltantes
+
+(
+    riskfactors_df
+    .missing.bind_shadow_matrix(only_missing=True)
+    .pipe(
+        lambda df: (
+            sns.displot(
+                data=df,
+                x = 'age', #variable de distribucion
+                col = 'marital_NA',  #variable de comparacion
+                row = 'weight_lbs_NA'               
+            )
+        )
+    )
+)

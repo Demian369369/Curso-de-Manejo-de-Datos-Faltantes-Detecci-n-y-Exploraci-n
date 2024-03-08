@@ -1,0 +1,232 @@
+Codigo de la grafica de dos variables con valores faltantes
+
+
+(
+    riskfactors_df
+    .select_dtypes(
+        exclude='category'  # excluye las variables categoricas
+    )
+    .pipe(
+        lambda df: df[df.columns[df.isna().any()]] #seleccionar solo columnas que tengan valores faltantes
+    )
+    .missing.bind_shadow_matrix(true_string = True, false_string = False)
+    .apply(
+        lambda column: column if '_NA' in column.name else column_fill_with_dummies(column, proportion_below=0.05, jitter=0.075)
+    )
+    .assign(
+        nullity = lambda df: df.weight_lbs_NA | df.height_inch_NA
+    )
+    .pipe(
+        lambda df: (
+            sns.scatterplot(
+                data = df,
+                x='weight_lbs',
+                y= 'height_inch',
+                hue='nullity'
+            )
+        )
+    )
+)
+
+
+
+graph33.jpg
+
+Si mejoran el codigo, colocar en una respuesta para yo tambien tomar el codigo y mejorar mis funciones, si pueden tambien documenten aun mejor las funciones de la manera mas clara y concisa para que sea mas entendible lo que hacen.
+Para ejecutar el en cuaderno jupyter
+
+(
+    riskfactors_df
+    .missing.missing_scatterplot_with_dummies(
+        columns_NA1='weight_lbs_NA',
+        columns_NA2='height_inch_NA',
+        x='weight_lbs',
+        y='height_inch'
+    )
+)
+Colocar esto en el area del archivo para extender las funciones:
+
+
+ #metodo para obtener relleno de columna con dummies, para usar en funcion de scatterplot
+    def column_fill_with_dummies(
+        self,
+        column: pd.Series,
+        proportion_below: float=0.10,
+        jitter: float=0.075,
+        seed: int=42
+    ) -> pd.Series:
+        
+        column = column.copy(deep=True)
+
+        # Extract values metadata.
+        missing_mask = column.isna()
+        number_missing_values = missing_mask.sum()
+        column_range = column.max() - column.min()
+
+        # Shift data
+        column_shift = column.min() - column.min() * proportion_below
+
+        # Create the "jitter" (noise) to be added around the points.
+        np.random.seed(seed)
+        column_jitter = (np.random.rand(number_missing_values) - 2) * column_range * jitter
+
+        # Save new dummy data.
+        column[missing_mask] = column_shift + column_jitter
+
+        return column
+Y la parte importante:
+
+
+    #metodo para visualizar valores NA y !NA desde una tabla a la que se relleno con dummies
+    def missing_scatterplot_with_dummies(
+        self,
+        columns_NA1,
+        columns_NA2,
+        x,
+        y
+    ):
+        return (
+            self._obj
+            .select_dtypes(
+                exclude="category"
+            )
+            .pipe(
+                lambda df: df[df.columns[df.isna().any()]]
+            )
+            .missing.bind_shadow_matrix(true_string=True, false_string=False)
+            .apply(
+                lambda column: column if "_NA" in column.name else self.column_fill_with_dummies(column, proportion_below=0.05, jitter=0.075)
+            )
+            .assign(
+                nullity=lambda df: df[columns_NA1] | df[columns_NA2]
+            )
+            .pipe(
+            lambda df: (
+                sns.scatterplot(
+                    data=df,
+                    x=x,
+                    y=y,
+                    hue="nullity"
+                    )
+                )
+            )
+        )
+
+        (
+    riskfactors_df
+    .missing
+    .scatterplot_valores_faltantes(
+            columna_1="weight_lbs",
+            columna_2="height_inch"
+    )
+)
+Resultado:
+
+
+
+16.png
+
+Y el código que agregué al archivo "pandas-missing-extension.ipynb" fue el siguiente:
+
+
+    def column_fill_with_dummies(
+        self,
+        column: pd.Series,
+        proportion_below: float=0.10,
+        jitter: float=0.075,
+        seed: int=42
+        ) -> pd.Series:
+
+        column = column.copy(deep=True)
+
+        # Extract values metadata.
+        missing_mask = column.isna()
+        number_missing_values = missing_mask.sum()
+        column_range = column.max() - column.min()
+
+        # Shift data
+        column_shift = column.min() - column.min() * proportion_below
+
+        # Create the "jitter" (noise) to be added around the points.
+        np.random.seed(seed)
+        column_jitter = (np.random.rand(number_missing_values) - 2) * column_range * jitter
+
+        # Save new dummy data.
+        column[missing_mask] = column_shift + column_jitter
+
+        return column
+        
+    def scatterplot_valores_faltantes(self, columna_1: str, columna_2: str) -> pd.DataFrame:
+        columna_NA_1 = columna_1 + "_NA"
+        columna_NA_2 = columna_2 + "_NA"
+
+        plt.figure(figsize=(10, 10))
+        (
+            self._obj
+            .select_dtypes(exclude="category")
+            .pipe(lambda df: df[df.columns[df.isna().any()]])
+            .missing.bind_shadow_matrix(true_string=True, false_string=False)
+            .apply(
+                lambda column: column if "_NA" in column.name 
+                else self._obj.missing.column_fill_with_dummies(column, proportion_below=0.05, jitter=0.075)
+            )
+            .assign(nullity=lambda df: df[columna_NA_1] | df[columna_NA_2])
+            .pipe(
+                lambda df: (
+                    sns.scatterplot(
+                        data=df, x=df[columna_1], y=df[columna_2], hue="nullity"
+                    )
+                )
+            )
+        )
+
+def column_fill_with_dummies(
+        self,
+        column: pd.Series,
+        proportion_below: float=0.10,
+        jitter: float=0.075,
+        seed: int=42
+        ) -> pd.Series:
+
+        column = column.copy(deep=True)
+
+        # Extract values metadata.
+        missing_mask = column.isna()
+        number_missing_values = missing_mask.sum()
+        column_range = column.max() - column.min()
+
+        # Shift data
+        column_shift = column.min() - column.min() * proportion_below
+
+        # Create the "jitter" (noise) to be added around the points.
+        np.random.seed(seed)
+        column_jitter = (np.random.rand(number_missing_values) - 2) * column_range * jitter
+
+        # Save new dummy data.
+        column[missing_mask] = column_shift + column_jitter
+
+        return column
+        
+    def scatterplot_valores_faltantes(self, columna_1: str, columna_2: str) -> pd.DataFrame:
+        columna_NA_1 = columna_1 + "_NA"
+        columna_NA_2 = columna_2 + "_NA"
+
+        plt.figure(figsize=(10, 10))
+        (
+            self._obj
+            .select_dtypes(exclude="category")
+            .pipe(lambda df: df[df.columns[df.isna().any()]])
+            .missing.bind_shadow_matrix(true_string=True, false_string=False)
+            .apply(
+                lambda column: column if "_NA" in column.name 
+                else self._obj.missing.column_fill_with_dummies(column, proportion_below=0.05, jitter=0.075)
+            )
+            .assign(nullity=lambda df: df[columna_NA_1] | df[columna_NA_2])
+            .pipe(
+                lambda df: (
+                    sns.scatterplot(
+                        data=df, x=df[columna_1], y=df[columna_2], hue="nullity"
+                    )
+                )
+            )
+        )

@@ -1,0 +1,32 @@
+Correlacion de Nulidad
+Existen valores faltantes que aparecen conjuntamente con otras variables en el conjunto de datos? . La correlacion de nulidad nos ayuda a encontrar relaciones entre las variables en funcion de su nulidad
+
+Heatmap de la variable riskfactors
+
+missingno.heatmap(
+    df=riskfactors_df
+)
+
+
+graph34.jpg
+
+Los valores coloreados de color gris representan que no hay una correlacion ni positiva ni negativa entre las valores faltantes de las variables
+
+Los valores coloreados de azul indican una correlacion positiva, es decir, la presencia de un valor faltante en una de las variables esta correlacionado con un valor faltante en la otra como es el caso de las variables dieta
+
+Los valores coloreados de rojo simboliza una correlacion negativa, es decir, mientras en una de las variables hay un valor faltante en la otro se tiene un valor completo y vicerversa como en el caso de las variables smoke_last y smoke_stop
+
+Hay caso donde te puedes encontrar un simbolo de <1 lo que indica que estas cerca del 100% de correlacion bien sea negativa o positiva dependiendo del color
+
+Dendograma de la variable riskfactors. Se trata de un clustering jerarquica que agrupa las variables con correlaciones muy altas
+
+missingno.dendrogram(
+    df=riskfactors_df   
+)
+
+
+graph35.jpg
+
+Las variables que estan agrupadas cerca del nivel base indican que la presencia de valores faltantes estan muy relacionadas entre si
+
+Mientras mas separado esten las variables en el diagrama es menos probable que los valores faltantes esten correlacionados entre las columnas

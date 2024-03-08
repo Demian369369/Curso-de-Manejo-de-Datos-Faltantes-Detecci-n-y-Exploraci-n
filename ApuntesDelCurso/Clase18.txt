@@ -1,0 +1,85 @@
+Eliminacion de Valores Faltantes
+Cuando se trata de valores faltantes tenemos dos aproximaciones para el tratamiento de los mismos:
+
+Eliminacion de valores faltantes: La eliminación de valores faltantes asume que los valores faltantes están perdidos completamente al azar (MCAR). En cualquier otro caso, realizar una eliminación de valores faltantes podrá ocasionar sesgos en los análisis y modelos subsecuentes. Por tanto, es importante investigar que mecanismos tienen los datos para asi evitar los sesgos a la hora de eliminarlos
+Imputacion de valores faltantes: consiste en añadir valores en los datos faltantes para mantener el registro en el dataset
+
+Pasos para la Eliminacion de Valores Faltantes
+
+Observa el numero de observaciones y variables que tiene el conjunto de datos
+
+riskfactors_df.shape
+--> (245, 34)
+Pairwise deletion (Eliminacion por pares)
+
+#Pandas por defecto,ignora los registros con datos faltantes a la hora de hacer algun calculo
+(
+    riskfactors_df
+    .weight_lbs
+    .mean()
+)
+--> 174.26808510638298
+Listwise deletion or Complete case (Eliminacion por lista o caso completo)
+Con base a 1 columna
+
+(
+    riskfactors_df
+    .dropna(
+        subset=['weight_lbs'], # indica la variable donde buscar los valores faltantes
+        how='any' # any indica en cualquier registro que aparezca un valor faltante
+    )
+)
+Con base a 2 columnas
+
+(
+    riskfactors_df
+    .dropna(
+        subset=['weight_lbs', 'height_inch'], # indica el parametro donde buscar los valores faltantes
+        how='any' # algoritmo con el que eliminar los registros
+    )
+    .shape
+)
+
+--> (234, 34)
+Con base a 2 columnas que tengan valores faltantes en los mismos registros
+
+# elimina los registros en los que hayan valores faltantes en dos variables al mismo tiempo
+(
+    riskfactors_df
+    .dropna(
+        subset=['weight_lbs', 'height_inch'], # indica el parametro donde buscar los valores faltantes
+        how='all' # all indica los registros donde hayan valores faltantes en ambas variables
+    )
+    .shape
+)
+--> (244, 34)
+Representacion Grafica tras la eliminacion de valores faltantes
+Con any
+
+(
+    riskfactors_df
+    .dropna(
+        subset=['weight_lbs', 'height_inch'], # indica el parametro donde buscar los valores faltantes
+        how='any' # any indica en cualquier registro que aparezca un valor faltante
+    )
+    .select_columns(['weight_lbs', 'height_inch'])
+    .pipe(missingno.matrix)
+)
+
+
+graph36.jpg
+
+Con all
+
+(
+    riskfactors_df
+    .dropna(
+        subset=['weight_lbs', 'height_inch'], # indica el parametro donde buscar los valores faltantes
+        how='all' # algoritmo con el que eliminar los registros
+    )
+    .select_columns(['weight_lbs', 'height_inch'])
+    .pipe(missingno.matrix)
+)
+
+
+graph37.jpg

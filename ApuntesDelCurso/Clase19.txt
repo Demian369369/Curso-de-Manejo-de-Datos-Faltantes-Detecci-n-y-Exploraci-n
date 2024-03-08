@@ -1,0 +1,27 @@
+Imputacion con base en el contexto
+Implica conocer la estructura de los datos por lo que podemos completar las entradas vacias. Para este ejemplo, tenemos un conjunto de datos:
+
+
+implicit_to_explicit_df = pd.DataFrame(
+    data={
+        "name": ["lynn", np.nan, "zelda", np.nan, "shadowsong", np.nan],
+        "time": ["morning", "afternoon", "morning", "afternoon", "morning", "afternoon",],
+        "value": [350, 310, 320, 350, 310, 320]
+    }
+)
+
+implicit_to_explicit_df
+
+
+graph38.jpg
+
+Claramente vemos que los valores de name podemos rellenarlos debido a que el contexto nos indica que son los nombres de la celda de arriba
+
+
+implicit_to_explicit_df.ffill() #Rellena los nan con los valores de la celda de arriba
+
+
+graph39.jpg
+
+Imputacion Basica de Datos
+Consiste en reemplazar los valores faltantes por algun valor, bien sea estadistico, algun valor por contexto o valores obtenidos mediante un modelo de Machine Learning

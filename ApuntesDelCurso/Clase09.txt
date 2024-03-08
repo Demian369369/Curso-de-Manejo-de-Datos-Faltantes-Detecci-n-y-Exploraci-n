@@ -1,0 +1,29 @@
+Estrategia para la identificacion de valores faltantes implicitos
+
+Pivotar la tabla de datos. Pivotar es tomar una columna de referencia sobre la cual se quiere extender sus categorias de manera que muestre una nueva visualizacion de los datos
+
+(
+    implicit_to_explicit_df
+    .pivot_wider(
+        index="name",        # variable nombre como filas
+        names_from="time",   # variable time como columnas
+        values_from="value"  # variable value como valores de la tabla
+    )
+)
+
+
+graph16.jpg
+
+Cuantificar ocurrencias de N-tuplas
+
+(
+    implicit_to_explicit_df
+    .value_counts(
+        subset=["name"]   # cuenta los valores asociados a los nombres
+    )
+    .reset_index(name="n")  # asigna n como indice del conteo
+    .query("n < 3")         # condicion a cumplir por n para que se muestre en la tabla
+)
+
+
+graph17.jpg

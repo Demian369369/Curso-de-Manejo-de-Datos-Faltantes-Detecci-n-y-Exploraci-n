@@ -1,0 +1,48 @@
+Preguntando por los valores faltantes de "pregnant" según la edad, podemos ver que donde hay datos la media de edad es de 33 y la edad máxima es de 44 (mujeres en edad reproductiva). Mientras que para los valores faltantes, la media de edad es de 61 y la edad máxima de 97 (mujeres que probablemente no están en edad reproductiva). Por lo tanto, podemos inferir que los valores faltante en "pregnant" están relacionados con la variable "age".
+
+
+
+missing-pregnancy-age.png
+
+
+Matriz de Sombra
+Permiten establecer relaciones entre las variables que tienen todas sus observaciones y la ausencia o presencia de otras variables de forma que se pueda comparar estadisticos o visualizarlos de manera efectiva
+
+Construccion de la Matriz de Sombra
+
+
+(
+    riskfactors_df
+    .isna() #crea una matriz de booleanos del dataframe
+    .replace({ #reemplaza los valores booleanos por valores adecuados
+        False:"Not missing",
+        True:"Missing"
+    })
+    .add_suffix("_NA") #agrega un sufijo en cada variable
+    .pipe(
+        lambda shadow_matrix: pd.concat(  # concatena los valores de la matriz de sombra a la derecha del dataframe
+            [riskfactors_df, shadow_matrix],
+            axis="columns"
+        )
+    )
+)
+Construcion de la Matriz de Sombra utilizando la funcion de utileria bind_shadow_matrix
+
+
+(
+    riskfactors_df
+    .missing
+    .bind_shadow_matrix(only_missing=True) # con este parametro = True solo se pasaran las variables que tienen valores faltantes
+)
+Explorando estadisticos utilizando las nuevas columnas de la matriz de sombra
+
+
+# Nos ayuda a encontrar si existe diferencias de alguna variable referente a la ausencia de otra
+(
+    riskfactors_df
+    .missing.bind_shadow_matrix(only_missing=True) #une la matriz de sombra creada
+    .groupby(["weight_lbs_NA"]) # agrupar por la ausencia de la variable peso 
+    ["age"] # variable age como referencia
+    .describe()
+    .reset_index()
+)

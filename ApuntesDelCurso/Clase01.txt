@@ -1,0 +1,46 @@
+Ignorar los valores faltantes puede introducir sesgos en tu analisis y modelo
+Multiple de los algoritmos disponibles fallaran.
+Los algoritmos no saben lidiar con los valores faltantes por lo que terminaran eliminadolo.
+La mejor manera de tratar los datos que faltan es no tenerlos, pero la realidad es que muchos 
+conjuntos de datos van a tener valores faltantes por lo que debes saber tratarlos y entenderlos.
+
+Explorar y Lidiar con Valores Faltantes
+
+Integridad de los Datos:
+
+Los valores faltantes pueden afectar la integridad de tus datos. Si no se abordan adecuadamente, 
+podrían llevar a interpretaciones incorrectas y conclusiones erróneas.
+Impacto en el Análisis Estadístico:
+
+La presencia de datos faltantes puede sesgar los resultados de análisis estadísticos y métricas. 
+Si no se manejan, podrían afectar la validez de las inferencias realizadas a partir de tus datos.
+Modelado Predictivo:
+
+En el contexto de la construcción de modelos predictivos, 
+los modelos suelen requerir datos completos. La presencia de valores faltantes puede afectar 
+negativamente el rendimiento del modelo y su capacidad para hacer predicciones precisas.
+Distribución de Datos:
+
+Los valores faltantes pueden afectar la distribución de tus datos. 
+Esto es importante porque muchos métodos estadísticos y modelos asumen que los datos siguen ciertas distribuciones.
+Eficiencia de los Modelos de Aprendizaje Automático:
+
+Muchos algoritmos de aprendizaje automático no pueden manejar directamente valores faltantes. 
+Por lo tanto, es necesario abordar este problema para poder aplicar estos modelos de manera efectiva.
+Credibilidad y Confianza:
+
+En entornos científicos, empresariales y académicos, la credibilidad y la confianza en los resultados 
+dependen en gran medida de la calidad de los datos. Lidiar con valores faltantes mejora la calidad y la fiabilidad
+de tus resultados.
+Eficiencia Operativa:
+
+En situaciones prácticas, como en entornos empresariales, 
+la eficiencia operativa puede depender de datos completos y precisos. 
+El manejo adecuado de valores faltantes puede mejorar la toma de decisiones y las operaciones.
+Cumplimiento Normativo:
+
+En ciertos sectores, como la atención médica y las finanzas, el cumplimiento normativo puede requerir la 
+gestión adecuada de datos faltantes para garantizar la precisión y la transparencia.
+En resumen, explorar y lidiar con valores faltantes es esencial para garantizar que tus datos sean confiables, 
+que tus análisis sean válidos y que tus modelos sean precisos. Ignorar este aspecto 
+puede conducir a interpretaciones incorrectas y decisiones erróneas basadas en datos incompletos.

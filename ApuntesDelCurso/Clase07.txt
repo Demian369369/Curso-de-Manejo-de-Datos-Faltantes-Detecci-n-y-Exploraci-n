@@ -1,0 +1,58 @@
+Visualizacion de Datos Faltantes
+Las tablas nos permite conocer las variables con su respectivo porcentaje de datos faltantes. Sin embargo para visualizar aparaciones conjuntas de valores faltantes, es decir que en una variable aparezca un valor faltante y en el mismo registro aparezca un valor faltante en otra variable, las tablas no ayudan. Para ello, utilizamos los utsetplot que establecen diferentes conjuntos de datos y su relacion.
+
+Visualizacion de de los datos faltantes para cada variable mediante un grafico de paleta
+
+# Grafica de páletas
+riskfactors_df.missing.missing_variable_plot()
+
+
+graph7.jpg
+
+Visualizacion de datos faltantes en los registros/Filas
+
+riskfactors_df.missing.missing_case_plot()
+
+
+graph8.jpg
+
+Visualizacion de datos faltantes para bloques de 10 registros
+
+(
+    riskfactors_df
+    .missing
+    .missing_variable_span_plot(
+        variable='weight_lbs',
+        span_every=10,
+        rot=0 #rotacion de los labels
+    )
+)
+
+
+graph9.jpg
+
+Visualizacion de datos faltantes para todas las variables del dataFrame
+
+#Visualiacion mediante una funcion de pandas
+missingno.bar(df = riskfactors_df)
+
+
+graph10.jpg
+
+Visualizacion de datos faltantes para cada variable mediante una matriz
+
+missingno.matrix(df = riskfactors_df)
+
+
+graph11.jpg
+
+Visualizacion de apariciones conjuntas de varias variables
+
+(
+    riskfactors_df
+    .missing
+    .missing_upsetplot(
+        variables=['pregnant', 'weight_lbs', 'smoke_stop'], # None para mostrar la relacion de todas las variables
+        element_size = 30  # tamaño de la visualizacion
+    )
+)

@@ -1,0 +1,13 @@
+Operaciones con valores faltantes
+Aprender otro idioma no es solo aprender diferentes palabras para las mismas cosas, sino aprender otra forma de pensar sobre las cosas
+
+En Python, None no tiene definido operaciones con valores numericos, booleanos… Ademas al comparar los None (==) ó utilizar la funcion is, arroja True
+En Numpy, los valores faltantes se representan con nan y tienen definido operaciones con valores numericos ya que es de tipo float. Por otro lado, al comparar los None arroja False es decir, que no son el mismo objeto y al compararlos mediante la funcion is arroja True es decir que un nan esta contenido en otro nana. Tener cuidado
+En Pandas, existen varias maneras de representar los valores faltantes (nan, <NA>, None)
+Funciones para buscar valores nulos en Pandas
+
+nombre_df.isna()
+nombre_df.isnull()
+Buscar valores faltantes en una columna del DataFrame
+
+nombre_df.nombre_columna.isnull()

@@ -1,0 +1,121 @@
+Codificacion de valores Faltantes
+Asumir que los datos faltantes siempre vendran en un unico formato es un error.
+
+Algunas formas en que se representa los datos faltantes son: NA, N/A, na, Missing, -1, -77, no available
+
+Valores comunmente asociados a valores faltantes. Cadenas de texto
+
+common_na_strings = (
+    "missing",
+    "NA",
+    "N A",
+    "N/A",
+    "#N/A",
+    "NA ",
+    " NA",
+    "N /A",
+    "N / A",
+    " N / A",
+    "N / A ",
+    "na",
+    "n a",
+    "n/a",
+    "na ",
+    " na",
+    "n /a",
+    "n / a",
+    " a / a",
+    "n / a ",
+    "NULL",
+    "null",
+    "",
+    "?",
+    "*",
+    ".",
+)
+Valores comunmente asociados a valores faltantes. Numeros
+
+common_na_numbers = (-9, -99, -999, -9999, 9999, 66, 77, 88, -1)
+DataFrame con valores faltantes
+
+missing_data_example_df = pd.DataFrame.from_dict(
+    dict(
+        x = [1, 3, "NA", -99, -98, -99],
+        y = ["A", "N/A", "NA", "E", "F", "G"],
+        z = [-100, -99, -98, -101, -1, -1]
+    )
+)
+
+missing_data_example_df
+Buscando valores faltantes con la funcion number_missing()
+
+missing_data_example_df.missing.number_missing()
+--> 0     # arroja cero debido a que no reconoce los diferentes tipos de datos faltantes
+Conocer las columnas donde hay valores faltantes mediante el tipo de dato
+
+missing_data_example_df.dtypes
+--> x    object
+		y    object
+		z     int64
+		dtype: object
+# La columna x solo tiene 1 string y pandas reconoce toda la columna como object
+# por tanto se intuye que en dicha columna existen valores faltantes
+Detectar valores faltantes revisando valores unicos de los datos
+
+missing_data_example_df.x.unique()
+--> array([1, 3, 'NA', -99, -98], dtype=object)
+# solamente puedes revisar columna por columna y sirve para dataframe pequeños
+Detectar valores faltantes revisando los valores unicos de las variables de un determinado tipo
+
+(
+    missing_data_example_df
+    .select_dtypes(object)
+    .apply(pd.unique)
+)
+
+--> x     [1, 3, NA, -99, -98]
+		y    [A, N/A, NA, E, F, G]
+		dtype: object
+# selecciona las variables de tipo object y regresa sus valores unicos
+Sustituyendo valores comunmente asociados a valores faltantes
+
+Sustitucion desde la lectura de los datos
+
+pd.read_csv(
+    './data/missing_data_enconding_example.csv',
+    na_filter=True,
+    na_values=[-99, -1]
+)
+# sustituye los valores -99 y -1 por nan desde el archivo raiz
+# de esta manera pandas detecta que son valores faltantes
+
+
+graph13.jpg
+
+Sustitucion Global
+
+(
+    missing_data_example_df
+    .replace(
+        to_replace=[-99, 'NA'],
+        value= np.nan
+    )
+)
+# sustituye todos los valores -99 y NA por nan desde el dataframe
+
+
+graph14.jpg
+
+Sustitucion Dirigida
+
+(
+    missing_data_example_df
+    .replace(
+        to_replace={
+            'x':{
+                -99:np.nan
+            }
+        }
+    )
+)
+# Sustituye los valores -99 por nan solo en la variable x del dataframe

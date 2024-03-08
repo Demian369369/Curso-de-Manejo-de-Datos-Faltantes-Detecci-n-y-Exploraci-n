@@ -1,0 +1,19 @@
+Resumen de la clase
+Tipos de Valores Faltantes
+Tenemos tres tipos de mecanismo de valores faltantes:
+
+Missing Completely at Random (Perdidos completamente al azar)
+Missing at Random (Perdidos al azar)
+Missing not at Random (Perdidos no al azar)
+Missing Completely at Random (MCAR)
+Son datos ocasionados por herramientas que dejan de funcionar sin ninguna razon detras. La localizacion de los valores faltantes ocurre completamente al azar, esto no depende de ningun otro dato
+
+Missing at Random (MAR)
+Las herramientas necesitan mantenimiento periodico para asegurar su funcionamiento constante. En las fechas donde se le hace mantenimiento sabemos que ocurrira una falta de datos por lo que esos datos faltantes son localizados. La localizacion de los valores faltantes en el conjunto de datos depende de otros valores observados
+
+Missing not at Random (MNAR)
+Las herramientas tienen limites. Al tratar de hacer seguimientos fuera de su rango de medicion, se generan valores faltantes. La localizacion de los valores faltantes en el conjunto de datos dependen de los valores faltantes en si mismos
+
+Puedo tener seguridad sobre que mecanismo de valores faltantes es correcto para mis datos?
+
+No, no podemos tener seuridad sobre cual mecanismo incidio sobre los datos, pero a traves de analisis y conocimiento del tema puedes hacer suposiciones razonables

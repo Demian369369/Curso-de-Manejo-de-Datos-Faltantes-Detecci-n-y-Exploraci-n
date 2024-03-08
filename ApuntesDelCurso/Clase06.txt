@@ -1,0 +1,13 @@
+abulacion de Valores Faltantes
+Tabular es expresar valores, magnitudes u otros datos por medio de tablas.
+
+Siempre empieza los analisis con preguntas simples, que lleven a un numero:
+cuantos valores deberian existir en el conjunto de datos?
+Construir resumenes por variables y observaciones:
+Cuantos valores faltantes existen por cada variable?
+¿Cuantas variables tiene X numero de valores faltantes?
+¿Cuantas observaciones tiene X numero de valores faltantes?
+Cuenta los registros con datos faltantes
+Salir de la caja y hacer mas preguntas
+¿Cuantos valores faltantes tengo en una variable cada X pasos? para el caso de trabajar con series de tiempo
+¿Cual es la racha de valores completos y faltantes en una variable?
